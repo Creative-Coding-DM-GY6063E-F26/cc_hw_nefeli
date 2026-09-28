@@ -8,12 +8,29 @@ let bDoExportSvg = false;
 function setup(){
   // These canvas dimensions are 8.5"x11" at 96 dpi
   createCanvas(816, 1056);
-  noLoop();
-  randomSeed(423);
+  // noLoop();
+  randomSeed(100);
 
-  background(255);
+  // background(255);
 
-  //vars for PATTERN ONE
+
+}
+
+function keyPressed(){
+  console.log("PRESSED S")
+
+  if (key == 's'){ 
+    bDoExportSvg = true; 
+  }
+}
+
+function draw(){
+
+  if (bDoExportSvg){
+    beginRecordSvg("myOutput.svg");
+  }
+
+    //vars for PATTERN ONE
   concentric_stop = false;
   concentric_d = 50;
   grid_size = 10;
@@ -32,25 +49,6 @@ function setup(){
   line2_stop = false
   x2 = 20;
   y2 = 200;
-
-
-}
-
-function keyPressed(){
-  if (key == 'r'){
-    draw();
-  }
-
-  if (key == 's'){ 
-    bDoExportSvg = true; 
-  }
-}
-
-function draw(){
-  
-  if (bDoExportSvg){
-    beginRecordSvg("myOutput.svg");
-  }
 
   //PATTERN ONE
   noFill();
@@ -95,29 +93,30 @@ function draw(){
   // bezier2_stop = true;
 
   //PATTERN THREE
-  // if(line1_stop == false){
+    if(line1_stop == false){
     for(i=0; i< 50; i++){
       line(x1,y1,x1+400,y1+50);
       // x1 += 10;
       y1 += 10;
     }
-  // }
-  // line1_stop = true;
+  }
+  line1_stop = true;
   
-    // if(line2_stop == false){
+    if(line2_stop == false){
       for(j=0; j<70; j++){
         line(x2, y2, x1+530, y2-35);
         y2 += 5;
       }
-    // }
-  // line2_stop = true;
+    }
+  line2_stop = true;
 
 
   // Draw stuff here, such as:
   // line(0,0, mouseX, mouseY); 
-
+  
   if (bDoExportSvg){
     endRecordSvg();
     bDoExportSvg = false;
+    console.log("STOPPING SVG");
   }
 }
