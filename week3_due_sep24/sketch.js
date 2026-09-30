@@ -1,22 +1,22 @@
 function setup() {
   createCanvas(1000, 1000);
 
-  rand_length = 0;
-  rand_direction = 0;
-  randx = 0;
-  randy = 0;
-  rand_opacity = 100;
-  rand_weight = 4;
-  rand_PI_start = 0;
-  rand_PI_end = 0;
-  bez_x_1 = 0;
-  bez_y_1 = 0;
-  bez_x_2 = 0;
-  bez_y_2 = 0;
+  let  rand_length = 0;
+  let rand_direction = 0;
+  let randx = 0;
+  let randy = 0;
+  let rand_opacity = 100;
+  let rand_weight = 4;
+  let rand_PI_start = 0;
+  let rand_PI_end = 0;
+  let bez_x_1 = 0;
+  let bez_y_1 = 0;
+  let bez_x_2 = 0;
+  let bez_y_2 = 0;
 
-  tan_circle_x = 0;
-  tan_circle_y = 0;
-  tan_circle_d = 30;
+  let tan_circle_x = 0;
+  let tan_circle_y = 0;
+  let tan_circle_d = 30;
 
   
   // bg tan
@@ -50,7 +50,7 @@ function draw(){
   // noFill();
   
 
-  for (i=0; i<50; i++){
+  for (let i=0; i<50; i++){
     rand_opacity = random(100,255)
     rand_weight = random(0.5,5);
     strokeWeight(rand_weight);
@@ -64,7 +64,7 @@ function draw(){
     line(randx,randy,rand_length,rand_direction); 
   }
 
-  for (i=0; i<100; i++){
+  for (let i=0; i<100; i++){
     rand_opacity = random(100,255)
     rand_weight = random(0.5,5);
     strokeWeight(rand_weight);
@@ -82,7 +82,7 @@ function draw(){
   }
 
   
-  for (i=0; i<100; i++){
+  for (let i=0; i<100; i++){
     rand_opacity = random(100,255)
     rand_weight = random(0.3,5);
     strokeWeight(rand_weight);
@@ -97,7 +97,7 @@ function draw(){
     line(randx,randy,rand_length,rand_direction); 
   }
 
-  for (i=0; i<100; i++){
+  for (let i=0; i<100; i++){
     rand_opacity = random(100,255)
     rand_weight = random(0.3,5);
     strokeWeight(rand_weight);
@@ -113,7 +113,7 @@ function draw(){
   }
   
   
-  for (i=0; i<40; i++){
+  for (let i=0; i<40; i++){
     rand_length = random(100);
     rand_direction = random(100);
     randx = random(250);
@@ -124,7 +124,7 @@ function draw(){
   }
 
 
-  for (i=0; i<50; i++){
+  for (let i=0; i<50; i++){
     rand_opacity = random(100,255)
     rand_weight = random(0.3,5);
     strokeWeight(rand_weight);
@@ -157,7 +157,7 @@ function draw(){
 
   noFill();
 
-  for (i=0; i<60; i++){
+  for (let i=0; i<60; i++){
     rand_opacity = random(150,255)
     rand_weight = random(0.5,4);
     strokeWeight(rand_weight);
@@ -175,7 +175,7 @@ function draw(){
     arc(randx,randy,rand_length,rand_direction,rand_PI_start, rand_PI_end);
   }
 
-  for (i=0; i<80; i++){
+  for (let i=0; i<80; i++){
     rand_opacity = random(100,255)
     rand_weight = random(0.5,5);
     strokeWeight(rand_weight);
@@ -197,7 +197,7 @@ function draw(){
   }
 
 
-  for (i=0; i<80; i++){
+  for (let i=0; i<80; i++){
     rand_opacity = random(100,230)
     rand_weight = random(0.5,5);
     strokeWeight(rand_weight);
@@ -215,7 +215,7 @@ function draw(){
     arc(randx,randy,rand_length,rand_direction,rand_PI_start, rand_PI_end);
   }
 
-  for (i=0; i<80; i++){
+  for (let i=0; i<80; i++){
     rand_opacity = random(100,255)
     rand_weight = random(0.5,5);
     strokeWeight(rand_weight);
@@ -352,9 +352,9 @@ function draw(){
   vert_spacing = 0;
   hor_spacing = 0;
   
-  for(i=0; i<6; i++){
+  for(let i=0; i<6; i++){
     
-    for(j=0; j<8; j++){
+    for(let j=0; j<8; j++){
 
       circle(tan_circle_x, tan_circle_y, tan_circle_d);
       tan_circle_x += 50;
