@@ -5,6 +5,27 @@
 p5.disableFriendlyErrors = true; // keep warnings quiet
 let bDoExportSvg = false; 
 
+//vars for PATTERN ONE
+let concentric_stop = false;
+let concentric_d = 50;
+let grid_size = 10;
+
+//vars for PATTERN TWO
+let bezier1_stop = false;
+let bezier2_stop = false
+let x = 0;
+let y = 0;
+
+//vars for PATTERN THREE
+let line1_stop = false;
+let x1 = 300;
+let y1 = 100;
+
+let line2_stop = false
+let x2 = 20;
+let y2 = 200;
+
+
 function setup(){
   // These canvas dimensions are 8.5"x11" at 96 dpi
   createCanvas(816, 1056);
@@ -15,6 +36,7 @@ function setup(){
 
 
 }
+
 
 function keyPressed(){
   console.log("PRESSED S")
@@ -30,32 +52,13 @@ function draw(){
     beginRecordSvg("myOutput.svg");
   }
 
-    //vars for PATTERN ONE
-  concentric_stop = false;
-  concentric_d = 50;
-  grid_size = 10;
-
-  //vars for PATTERN TWO
-  bezier1_stop = false;
-  bezier2_stop = false
-  x = 0;
-  y = 0;
-
-  //vars for PATTERN THREE
-  line1_stop = false;
-  x1 = 300;
-  y1 = 100;
-
-  line2_stop = false
-  x2 = 20;
-  y2 = 200;
 
   //PATTERN ONE
   noFill();
   stroke(0,0,0);
 
   // if (concentric_stop == false){
-  //   for (i=0; i<47; i++){
+  //   for (let i=0; i<47; i++){
   //     circle(width/2, height/2, concentric_d);
   //     concentric_d += 15;
   //   }
@@ -63,12 +66,12 @@ function draw(){
   // concentric_stop = true;
   // x = 0;
   // y = 0;
-  // for (i=0; i<width; i+=grid_size){
+  // for (let i=0; i<width; i+=grid_size){
   //   line(x, y, x, y+height)
   //   x += 10;
   // }
   
-  // for(j=0; j<height; j+=grid_size){
+  // for(let j=0; j<height; j+=grid_size){
   //   line(x, y, x+width, y);
   //   y += 10;
   // }
@@ -76,7 +79,7 @@ function draw(){
     
   //PATTERN TWO
   // if (bezier1_stop == false){
-  //   for (i=0; i<100; i++){
+  //   for (let i=0; i<100; i++){
   //     bezier(x, 0, x-200, height/4, x+200, 3*(height/4), x, height);
   //     x += 10;
   //   } 
@@ -84,7 +87,7 @@ function draw(){
   // bezier1_stop = true;
   
   // if (bezier2_stop == false){
-  //   for (j=0; j<100; j++){
+  //   for (let j=0; j<100; j++){
   //     bezier(0, y, width/8, y-300, 3*(width/8), y+300, width/2, y);
   //     bezier(width/2, y, 5*(width/8), y-300, 7*(width/8), y+300, width, y);
   //     y += 10;
@@ -93,8 +96,8 @@ function draw(){
   // bezier2_stop = true;
 
   //PATTERN THREE
-    if(line1_stop == false){
-    for(i=0; i< 50; i++){
+  if(line1_stop == false){
+    for(let i=0; i<50; i++){
       line(x1,y1,x1+400,y1+50);
       // x1 += 10;
       y1 += 10;
@@ -103,7 +106,7 @@ function draw(){
   line1_stop = true;
   
     if(line2_stop == false){
-      for(j=0; j<70; j++){
+      for(let j=0; j<70; j++){
         line(x2, y2, x1+530, y2-35);
         y2 += 5;
       }
