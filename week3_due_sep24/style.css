@@ -1,0 +1,29 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* canvas {
+  display: block;
+} */
+
+.text {
+  font-family: monospace;
+  justify-content: center;
+}
+
+.image_display{
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.p5js {
+  display: left;
+  width: 45%;
+  max-width: 900px;
+}
+
+.ref_image {
+  display: right;
+  width: 45%;
+}
