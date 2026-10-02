@@ -1,3 +1,3 @@
-# creative coding fall 2026 #
+# live website link #
 
-all homework submitted here :3
+https://creative-coding-dm-gy6063e-f26.github.io/cc_hw_nefeli/
