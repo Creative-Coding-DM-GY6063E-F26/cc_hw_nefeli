@@ -5,7 +5,7 @@
 p5.disableFriendlyErrors = true; // keep warnings quiet
 let bDoExportSvg = false; 
 
-//vars for PATTERN ONE
+ //vars for PATTERN ONE
 let concentric_stop = false;
 let concentric_d = 50;
 let grid_size = 10;
@@ -53,23 +53,23 @@ function draw(){
   }
 
 
-  //PATTERN ONE
   noFill();
   stroke(0,0,0);
 
-  // if (concentric_stop == false){
-  //   for (let i=0; i<47; i++){
-  //     circle(width/2, height/2, concentric_d);
-  //     concentric_d += 15;
-  //   }
-  // }
-  // concentric_stop = true;
-  // x = 0;
-  // y = 0;
-  // for (let i=0; i<width; i+=grid_size){
-  //   line(x, y, x, y+height)
-  //   x += 10;
-  // }
+  //PATTERN ONE
+  if (concentric_stop == false){
+    for (let i=0; i<47; i++){
+      circle(width/2, height/2, concentric_d);
+      concentric_d += 15;
+    }
+  }
+  concentric_stop = true;
+  x = 0;
+  y = 0;
+  for (let i=0; i<width; i+=grid_size){
+    line(x, y, x, y+height)
+    x += 10;
+  }
   
   // for(let j=0; j<height; j+=grid_size){
   //   line(x, y, x+width, y);
@@ -96,22 +96,25 @@ function draw(){
   // bezier2_stop = true;
 
   //PATTERN THREE
-  if(line1_stop == false){
-    for(let i=0; i<50; i++){
-      line(x1,y1,x1+400,y1+50);
-      // x1 += 10;
-      y1 += 10;
-    }
-  }
-  line1_stop = true;
+  // if(line1_stop == false){
+  //   for(let i=0; i<50; i++){
+  //     line(x1,y1,x1+400,y1+50);
+  //     // x1 += 10;
+  //     y1 += 10;
+  //   }
+  // }
+  // line1_stop = true;
   
-    if(line2_stop == false){
-      for(let j=0; j<70; j++){
-        line(x2, y2, x1+530, y2-35);
-        y2 += 5;
-      }
-    }
-  line2_stop = true;
+  //   if(line2_stop == false){
+  //     for(let j=0; j<70; j++){
+  //       line(x2, y2, x1+530, y2-35);
+  //       y2 += 5;
+  //     }
+  //   }
+  // line2_stop = true;
+
+  //ADDS CIRCLE FUNCTION
+  drawCircles(3);
 
 
   // Draw stuff here, such as:
@@ -121,5 +124,16 @@ function draw(){
     endRecordSvg();
     bDoExportSvg = false;
     console.log("STOPPING SVG");
+  }
+}
+
+function drawCircles(num_circle) {
+  let x = 10;
+  let y = 10;
+  
+  for (let i = 0; i < num_circle; i++){
+    circle(x,y,20,20);
+    x += 10;
+    y += 10;
   }
 }
