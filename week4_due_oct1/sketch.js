@@ -5,27 +5,6 @@
 p5.disableFriendlyErrors = true; // keep warnings quiet
 let bDoExportSvg = false; 
 
- //vars for PATTERN ONE
-let concentric_stop = false;
-let concentric_d = 50;
-let grid_size = 10;
-
-//vars for PATTERN TWO
-let bezier1_stop = false;
-let bezier2_stop = false
-let x = 0;
-let y = 0;
-
-//vars for PATTERN THREE
-let line1_stop = false;
-let x1 = 300;
-let y1 = 100;
-
-let line2_stop = false
-let x2 = 20;
-let y2 = 200;
-
-
 function setup(){
   // These canvas dimensions are 8.5"x11" at 96 dpi
   createCanvas(816, 1056);
@@ -51,6 +30,26 @@ function draw(){
   if (bDoExportSvg){
     beginRecordSvg("myOutput.svg");
   }
+
+  //vars for PATTERN ONE
+  let concentric_stop = false;
+  let concentric_d = 50;
+  let grid_size = 10;
+
+  //vars for PATTERN TWO
+  let bezier1_stop = false;
+  let bezier2_stop = false
+  let x = 0;
+  let y = 0;
+
+  //vars for PATTERN THREE
+  let line1_stop = false;
+  let x1 = 300;
+  let y1 = 100;
+
+  let line2_stop = false
+  let x2 = 20;
+  let y2 = 200;
 
 
   noFill();
