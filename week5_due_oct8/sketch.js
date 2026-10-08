@@ -44,7 +44,7 @@ function draw(){
   // CONCENTRIC CIRCLES
   stroke(0, 255, 255);
   let d = 300;
-  // concentric_circles(d);
+  concentric_circles(d);
 
 
   // LETTERS ALONG A PATH
@@ -58,7 +58,7 @@ function draw(){
   let x = 0;
   let y = 350;
   let rotation_rate = -1;
-  // letter_mask(x, y, string, rotation_rate);
+  letter_mask(x, y, string, rotation_rate);
   
   // erase();
   // noErase();
@@ -85,7 +85,7 @@ function draw(){
   let dist = 0.5;
   let angle = 0.1;
 
-  loops(center_x, center_y, dist, angle);
+  // loops(center_x, center_y, dist, angle);
   // pop();
   
   if (bDoExportSvg){
