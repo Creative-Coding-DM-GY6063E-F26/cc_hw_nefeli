@@ -5,6 +5,7 @@
 p5.disableFriendlyErrors = true; // keep warnings quiet
 let bDoExportSvg = false; 
 
+
 function setup(){
   // These canvas dimensions are 8.5"x11" at 96 dpi
   createCanvas(816, 1056);
@@ -26,6 +27,25 @@ function keyPressed(){
 }
 
 function draw(){
+ //vars for PATTERN ONE
+  let concentric_stop = false;
+  let concentric_d = 50;
+  let grid_size = 10;
+
+  //vars for PATTERN TWO
+  let bezier1_stop = false;
+  let bezier2_stop = false
+  let x = 0;
+  let y = 0;
+
+  //vars for PATTERN THREE
+  let line1_stop = false;
+  let x1 = 300;
+  let y1 = 100;
+
+  let line2_stop = false
+  let x2 = 20;
+  let y2 = 200;
 
   if (bDoExportSvg){
     beginRecordSvg("myOutput.svg");
@@ -56,24 +76,20 @@ function draw(){
   stroke(0,0,0);
 
   //PATTERN ONE
-  if (concentric_stop == false){
-    for (let i=0; i<47; i++){
-      circle(width/2, height/2, concentric_d);
-      concentric_d += 15;
-    }
-  }
-  concentric_stop = true;
-  x = 0;
-  y = 0;
-  for (let i=0; i<width; i+=grid_size){
-    line(x, y, x, y+height)
-    x += 10;
-  }
-  
-  // for(let j=0; j<height; j+=grid_size){
-  //   line(x, y, x+width, y);
-  //   y += 10;
+  // if (concentric_stop == false){
+  //   for (let i=0; i<47; i++){
+  //     circle(width/2, height/2, concentric_d);
+  //     concentric_d += 15;
+  //   }
   // }
+  // concentric_stop = true;
+  // x = 0;
+  // y = 0;
+  // for (let i=0; i<width; i+=grid_size){
+  //   line(x, y, x, y+height)
+  //   x += 10;
+  // }
+  
 
     
   //PATTERN TWO
@@ -95,25 +111,25 @@ function draw(){
   // bezier2_stop = true;
 
   //PATTERN THREE
-  // if(line1_stop == false){
-  //   for(let i=0; i<50; i++){
-  //     line(x1,y1,x1+400,y1+50);
-  //     // x1 += 10;
-  //     y1 += 10;
-  //   }
-  // }
-  // line1_stop = true;
+  if(line1_stop == false){
+    for(let i=0; i<50; i++){
+      line(x1,y1,x1+400,y1+50);
+      // x1 += 10;
+      y1 += 10;
+    }
+  }
+  line1_stop = true;
   
-  //   if(line2_stop == false){
-  //     for(let j=0; j<70; j++){
-  //       line(x2, y2, x1+530, y2-35);
-  //       y2 += 5;
-  //     }
-  //   }
-  // line2_stop = true;
+    if(line2_stop == false){
+      for(let j=0; j<70; j++){
+        line(x2, y2, x1+530, y2-35);
+        y2 += 5;
+      }
+    }
+  line2_stop = true;
 
   //ADDS CIRCLE FUNCTION
-  drawCircles(3);
+  // drawCircles(3);
 
 
   // Draw stuff here, such as:
