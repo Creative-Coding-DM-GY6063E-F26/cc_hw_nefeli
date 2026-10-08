@@ -51,27 +51,6 @@ function draw(){
     beginRecordSvg("myOutput.svg");
   }
 
-  //vars for PATTERN ONE
-  let concentric_stop = false;
-  let concentric_d = 50;
-  let grid_size = 10;
-
-  //vars for PATTERN TWO
-  let bezier1_stop = false;
-  let bezier2_stop = false
-  let x = 0;
-  let y = 0;
-
-  //vars for PATTERN THREE
-  let line1_stop = false;
-  let x1 = 300;
-  let y1 = 100;
-
-  let line2_stop = false
-  let x2 = 20;
-  let y2 = 200;
-
-
   noFill();
   stroke(0,0,0);
 
