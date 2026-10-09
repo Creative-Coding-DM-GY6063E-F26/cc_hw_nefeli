@@ -14,6 +14,10 @@ canvas {
   font-style: normal; 
 }
 
+body {
+  max-width: 100%;
+}
+
 h1 {
   font-family: 'blackletter';
   src: url('./fonts/blackletter.ttf');
