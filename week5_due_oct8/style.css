@@ -49,6 +49,7 @@ h2 {
 .image_container img {
   width: 600px;
   height: auto;
+  object-fit: contain;
 }
 
 .svg_container {
@@ -63,4 +64,5 @@ h2 {
 .svg_container img {
   width: 600px;
   height: auto;
+  object-fit: contain;
 }
