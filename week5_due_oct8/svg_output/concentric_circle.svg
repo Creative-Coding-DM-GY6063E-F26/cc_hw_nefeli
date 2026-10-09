@@ -1,0 +1,58 @@
+<!-- myOutput.svg -->
+<!-- Generated using p5.js v.2.3.0 and p5.plotSvg v.0.3.0: -->
+<!-- A Plotter-Oriented SVG Exporter for p5.js -->
+<!-- Wed Oct 07 2026 01:06:50 GMT-0400 (Eastern Daylight Time) -->
+<!-- DPI: 96 -->
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="8.5in" height="11in" viewBox="0 0 816 1056">
+  <style>
+      circle, ellipse, line, path, polygon, polyline, rect, quad, text {
+        fill: none;
+        stroke: black;
+        stroke-width: 1;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+      }
+    </style>
+<circle cx="408" cy="528" r="150" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="155" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="160" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="165" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="170" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="175" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="180" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="185" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="190" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="195" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="200" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="205" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="210" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="215" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="220" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="225" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="230" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="235" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="240" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="245" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="250" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="255" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="260" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="265" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="270" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="275" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="280" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="285" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="290" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="295" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="300" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="305" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="310" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="315" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="320" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="325" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="330" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="335" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="340" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="345" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="350" style="stroke:#00ffff;"/>
+</svg>

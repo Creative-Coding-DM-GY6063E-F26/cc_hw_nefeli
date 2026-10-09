@@ -1,0 +1,134 @@
+<!-- myOutput.svg -->
+<!-- Generated using p5.js v.2.3.0 and p5.plotSvg v.0.3.0: -->
+<!-- A Plotter-Oriented SVG Exporter for p5.js -->
+<!-- Wed Oct 07 2026 00:28:32 GMT-0400 (Eastern Daylight Time) -->
+<!-- DPI: 96 -->
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="8.5in" height="11in" viewBox="0 0 816 1056">
+  <style>
+      circle, ellipse, line, path, polygon, polyline, rect, quad, text {
+        fill: none;
+        stroke: black;
+        stroke-width: 1;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+      }
+    </style>
+<circle cx="408" cy="528" r="150" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="155" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="160" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="165" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="170" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="175" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="180" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="185" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="190" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="195" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="200" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="205" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="210" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="215" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="220" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="225" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="230" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="235" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="240" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="245" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="250" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="255" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="260" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="265" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="270" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="275" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="280" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="285" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="290" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="295" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="300" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="305" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="310" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="315" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="320" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="325" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="330" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="335" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="340" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="345" style="stroke:#00ffff;"/>
+<circle cx="408" cy="528" r="350" style="stroke:#00ffff;"/>
+<g transform="translate(408, 528)">
+  <g transform="rotate(5156.620156)">
+    <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;">h</text>
+    <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+    <g transform="rotate(-1093.163187)">
+      <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;">e</text>
+      <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+      <g transform="rotate(-850.238034)">
+        <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;">l</text>
+        <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+        <g transform="rotate(-769.262983)">
+          <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;">l</text>
+          <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+          <g transform="rotate(-769.262983)">
+            <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;">o</text>
+            <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+            <g transform="rotate(-1012.188136)">
+              <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;"> </text>
+              <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+              <g transform="rotate(0)">
+                <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;">h</text>
+                <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+                <g transform="rotate(-1093.163187)">
+                  <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;">o</text>
+                  <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+                  <g transform="rotate(-1012.188136)">
+                    <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;">w</text>
+                    <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+                    <g transform="rotate(-1700.476069)">
+                      <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;"> </text>
+                      <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+                      <g transform="rotate(0)">
+                        <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;">a</text>
+                        <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+                        <g transform="rotate(-1133.650712)">
+                          <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;">r</text>
+                          <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+                          <g transform="rotate(-850.238034)">
+                            <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;">e</text>
+                            <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+                            <g transform="rotate(-850.238034)">
+                              <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;"> </text>
+                              <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+                              <g transform="rotate(0)">
+                                <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;">u</text>
+                                <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+                                <g transform="rotate(-1214.625763)">
+                                  <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;"> </text>
+                                  <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+                                  <g transform="rotate(0)">
+                                    <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;">?</text>
+                                    <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+                                    <g transform="rotate(-1012.188136)">
+                                      <text x="-60" y="345" font-family="[object Object]" font-size="270" style="stroke:#ff00ff;">!</text>
+                                      <circle cx="0" cy="0" r="0.2500" style="stroke:#ff00ff;"/>
+                                      <g transform="rotate(-526.337831)">
+                                      </g>
+                                    </g>
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</g>
+</svg>
