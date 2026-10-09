@@ -12,5 +12,7 @@ function draw() {
   console.log('second: ' + s);
   circle(x, height/2, 100);
   x += s;
-
+  
+  let x = frameCount % position;
+  circle(x, height/2, 100);
 }
