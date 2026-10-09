@@ -47,7 +47,7 @@ h2 {
 }
 
 .image_container img {
-  width: 100%;
+  width: 600px;
   height: auto;
 }
 
@@ -61,6 +61,6 @@ h2 {
 }
 
 .svg_container img {
-  width: 100%;
+  width: 600px;
   height: auto;
 }
