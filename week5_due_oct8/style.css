@@ -50,7 +50,7 @@ h2 {
 }
 
 .svg_container {
-  max-width: 100%;
+  /* max-width: 100%; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 30px;
