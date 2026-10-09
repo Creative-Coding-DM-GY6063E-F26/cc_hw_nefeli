@@ -36,15 +36,17 @@ h2 {
 }
 
 .image_container {
+  max-width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 10px;
   padding-left: 5%;
-  padding-right: 50%;
+  padding-right: 5%;
   padding-bottom: 3%
 }
 
 .svg_container {
+  max-width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 30px;
