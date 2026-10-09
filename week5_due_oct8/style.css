@@ -6,3 +6,50 @@ html, body {
 canvas {
   display: block;
 }
+
+@font-face {
+  font-family: 'blackletter';
+  src: url('./fonts/blackletter.ttf');
+  font-weight: normal;
+  font-style: normal; 
+}
+
+h1 {
+  font-family: 'blackletter';
+  src: url('./fonts/blackletter.ttf');
+  font-weight: normal;
+  font-style: normal; 
+  font-size: 64px;
+  padding-left: 5%;
+  padding-top: 3%;
+  padding-bottom: 1%;
+}
+
+h2 {
+  font-family: 'blackletter';
+  src: url('./fonts/blackletter.ttf');
+  font-weight: normal;
+  font-style: normal; 
+  font-size: 40px;
+  padding-left: 5%;
+  /* padding-top: 0%; */
+}
+
+.image_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+  padding-left: 5%;
+  padding-right: 50%;
+  padding-bottom: 3%
+}
+
+.svg_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 30px;
+  column-gap: 10px;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 10%;
+}
