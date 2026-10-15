@@ -90,13 +90,6 @@ function draw() {
   mil_hue = map((mil%1000), 0, 1000, 0, 100);
   background(mil_hue, 70, 80);
 
-  //simulating slowing the time / making it more visible based on interaction
-  if (mouseIsPressed === true){
-    mil = millis();
-    print("!! MOUSE CLICKED !!");
-  }
-
-
   //movement
   second_x = lerp(second_x, target_s_x, 0.05);
   second_y = lerp(second_y, target_s_y, 0.05);
@@ -193,6 +186,8 @@ function windowResized(event) {
 
 //movement of circles to where mouse is clicked
 function mouseClicked(){
+  mil = millis();
+  print("!! MOUSE CLICKED !!");
   second_x = mouseX;
   second_y = mouseY;
   minute_x = mouseX;
