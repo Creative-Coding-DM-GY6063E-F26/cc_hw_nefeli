@@ -24,7 +24,6 @@ function draw() {
   background(255);
   noStroke();
   fill(0);
-  filter(BLUR, 25);
 
   
   let mil = millis();
