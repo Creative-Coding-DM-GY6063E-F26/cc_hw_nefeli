@@ -34,8 +34,8 @@ function draw() {
   let m = month();
   let _year = year();
 
-  print(_hour);
-  print(_min);
+  // print(_hour);
+  // print(_min);
 
   let month_ratio = m/12;
   let day_ratio = 0;
@@ -54,9 +54,9 @@ function draw() {
   let g = day_ratio * 255;
   let b = year_ratio * 255;
 
-  let current_frame_num = frameCount;
+  // let current_frame_num = frameCount;
   // let frame_count = (current_frame_num % 100); 
-  print("__ second: " + _sec);
+  // print("__ second: " + _sec);
   // print("FRAME COUNT: " + frame_count);
   
   //starting sketch at the beginning of the minute
@@ -119,12 +119,12 @@ function draw() {
 
     if (hour_inverse == false){
       current_d += pixel_change;
-      print("CURRENT HOUR DIAMETER: " + current_d);
+      // print("CURRENT HOUR DIAMETER: " + current_d);
       circle(width/5, 5*height/6, current_d);
     }
     else{
       current_d -= pixel_change;
-      print("CURRENT HOUR DIAMETER: " + current_d);
+      // print("CURRENT HOUR DIAMETER: " + current_d);
       circle(width/5, 5*height/6, current_d);
     }
 
