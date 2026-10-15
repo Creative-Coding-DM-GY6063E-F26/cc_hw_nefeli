@@ -77,13 +77,13 @@ function draw() {
   else {
     day_ratio = _day/31;
   }
-  let year_ratio = _year/10000;
-
-  let r = month_ratio * 255;
-  let g = day_ratio * 255;
-  let b = year_ratio * 255;
+  let year_ratio = map(_year, 0, 10000, 70, 100);
+  let s = map(month_ratio, 0, 1, 50, 100);
+  // let s = month_ratio * 100;
+  let h = day_ratio * 100;
+  // let b = year_ratio * 100;
    
-  fill(r,g,b);
+  fill(h, s, year_ratio);
 
   //changing background to milis on click
   mil_hue = map((mil%1000), 0, 1000, 0, 100);
