@@ -47,6 +47,7 @@ function setup() {
   target_h_y = 5*height/6;
 
   mil_hue = millis();
+  mil = millis();
 
 }
 
@@ -77,7 +78,7 @@ function draw() {
   else {
     day_ratio = _day/31;
   }
-  let year_ratio = map(_year, 0, 10000, 70, 100);
+  let year_ratio = map(_year, 0, 10000, 70, 90);
   let s = map(month_ratio, 0, 1, 50, 100);
   // let s = month_ratio * 100;
   let h = day_ratio * 100;
@@ -87,7 +88,7 @@ function draw() {
 
   //changing background to milis on click
   mil_hue = map((mil%1000), 0, 1000, 0, 100);
-  background(mil_hue, 70, 85);
+  background(mil_hue, 70, 80);
 
   //simulating slowing the time / making it more visible based on interaction
   if (mouseIsPressed === true){
