@@ -1,82 +1,99 @@
-/*
- * p5.mapper
- * https://github.com/jdeboi/p5.mapper
- *
- * Jenna deBoisblanc
- * jdeboi.com
- *
- */
+let pMapper;
+let quadMap;
+let images = [];
 
-let pMapper; // variable to store pMapper object (projection mapping library)
-let quadLeft, quadRight, quadTop; // my quad surfaces
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-
   // create mapper object
   pMapper = createProjectionMapper(this);
-  //pMapper.load("map.json");
+  // loads calibration in the "maps" directory
+  pMapper.load("./maps/class_cube_map.json");
 
-  // create "quads" for each surface of your projection
-  quadLeft = pMapper.createQuadMap(400, 400, 20, 20); // 20x20 mesh matches map.json. quads should be proportionate to the physical object you are projecting onto
-  quadRight = pMapper.createQuadMap(400, 400, 20, 20);
-  quadTop = pMapper.createQuadMap(400, 400, 20, 20);
+  images[0] = loadImage("./assets/sad_ant.jpg");
+  images[1] = loadImage("./assets/guy.jpg");
+  images[2] = loadImage("./assets/yippee.jpg");
+  print("IMAGES ARRAY: " + images[0]);
+
+  // quadMap = pMapper.createQuadMap(400, 400);
+
 
 }
 
 function draw() {
   background(0);
 
-  // display each of the projection surfaces in draw
-  quadLeft.displaySketch(mySketch);
-  quadRight.displaySketch(myOtherSketch);
-  quadTop.display(color("red"));
+  pMapper.surfaces.forEach((surface, i) => {
+    // displaySketch only passes pg to its callback, so wrap it to pass the index too
+    // surface.displaySketch((pg) => drawCoords(pg, i));
+
+    //OUR SKETCH
+    surface.displaySketch((pg) => drawCoords(pg, i));
+  });
 }
 
-function mySketch(pg){ // "pg" refers to each canvas "instance"
-  pg.clear();
-  pg.push();
-  // your sketch goes between push and pop. remember to use the 'pg.' prefix for all p5 functions
-  pg.background(0,255,0);
-  pg.textAlign(CENTER,CENTER);
-  pg.textSize(70);
-  pg.fill(color('black'));
-  pg.text('hello world, this is text',200,175);
-  // ends here
-  pg.pop();
-}
-
-function myOtherSketch(pg){
-  pg.clear();
-  pg.push();
-  // your mini sketch goes here!
-  
-  pg.background(255,0,0);
-  
-  pg.rectMode(CORNERS);  
-  // and ends here!
-  pg.pop();
-}
-
-function keyPressed() { // keypressed toggles different modes
+function keyPressed() {
   switch (key) {
-    case "c":
+    case 'c':
       pMapper.toggleCalibration();
       break;
-    case "f":
+    case 'f':
       let fs = fullscreen();
       fullscreen(!fs);
       break;
     case "l":
-      pMapper.load("map.json");
+      pMapper.load("./maps/class_cube_map.json");
       break;
-
+    case 'q':
+      pMapper.createQuadMap(400,400);
+      console.log(pMapper.surfaces);
+      break;
     case "s":
-      pMapper.save("map.json");
+      pMapper.save();
       break;
   }
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+function drawCoords(pg, mapIndex) {
+  pg.clear();
+  pg.push();
+
+
+  // one color per surface, wrapping around if there are more surfaces than colors
+  let colors = [
+    color(255, 0, 0),
+    color(0, 255, 0),
+    color(0, 0, 255),
+    color(255, 255, 0),
+    color(255, 0, 255),
+    color(0, 255, 255)
+  ];
+  let bgColor = colors[mapIndex % colors.length];
+  pg.background(255, 255, 0);
+
+  // pg.fill(0);
+  // pg.stroke(0);
+  // pg.text = ('hello', 150, 150);
+
+
+  // for (let i = 0; i < 1000; i += 50) {
+  //   pg.text(hi, i, 150);
+  //   pg.text(hi, 150, i);
+  // }
+  pg.fill(255);
+  pg.ellipse(mouseX, mouseY, 50);
+  pg.pop();
 }
+
+// function reactionImg(pg, mapIndex){
+//   // pg.clear();
+//   // pg.push();
+//   quadMap.displayTexture(img);
+//   //one image per surface
+//   // print("CURRENT IMAGE: " + mapIndex);
+//   // if (images[0]){
+//   //   pg.image(images[0], 100, 100, 400, 400);
+//   // }
+//   // pg.pop();
+// }

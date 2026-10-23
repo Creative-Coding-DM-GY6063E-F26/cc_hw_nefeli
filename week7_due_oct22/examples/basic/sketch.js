@@ -38,7 +38,7 @@ function setup() {
   bezMap = pMapper.createBezierMap();
 
   // loads calibration in the "maps" directory
-  pMapper.load("maps/map.json");
+  pMapper.load("maps/class_cube_map.json");
 }
 
 function draw() {
@@ -128,7 +128,7 @@ function keyPressed() {
       fullscreen(!fs);
       break;
     case "l":
-      pMapper.load("maps/map.json");
+      pMapper.load("maps/class_cube_map.json");
       break;
 
     case "s":
