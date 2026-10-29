@@ -1,6 +1,6 @@
 /**
  * 
- * A simple draawing machine that draws circles when the mouse is pressed.
+ * A simple drawing machine that draws circles when the mouse is pressed.
  * 
  */
 function setup() {
@@ -25,3 +25,8 @@ function keyPressed() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+
+// Exercises for you to try :
+// 1. Use mouseX or mouseY to change the circle's size or color as you draw.
+//    Hint: map(mouseX, 0, width, 5, 100)
+

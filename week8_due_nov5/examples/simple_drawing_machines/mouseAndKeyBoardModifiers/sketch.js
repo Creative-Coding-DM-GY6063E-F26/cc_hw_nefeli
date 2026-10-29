@@ -62,3 +62,10 @@ function keyPressed() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+
+// Exercises for you to try :
+// 1. Add a new key that changes something else about the brush, like
+//    switching between circles and squares, or turning stroke on/off.
+// 2. Use the arrow keys to make the brush bigger or smaller one step at a
+//    time instead of cycling. Hint: keyCode === UP_ARROW
+// 3. Press 's' to save your drawing as an image with saveCanvas().
