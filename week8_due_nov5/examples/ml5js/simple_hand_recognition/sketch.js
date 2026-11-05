@@ -7,7 +7,7 @@ let current_pose = alphabetDetection;
 
 let letter_saved = false;
 let letters = [];
-let text_size;
+let font_size;
 
 //fonts
 let font_1;
@@ -44,28 +44,23 @@ function draw() {
   background(220);
   // image(vid, 0, 0);
   // drawHands();
-  // controlSpecs();
   // printLog();
 
+  controlSpecs();
   handPress(current_pose());
-  // let letter = current_pose();
-  // let hand_press = handPress();
-  // savedLetter(letter, hand_press
 
-  //savedLetter outputs 
-  // let current_text = savedLetter();
-  // text(toString(current_text[0]), current_text[1], current_text[2]);
 
   // console.log("----------LETTER ARRAY: " + letters);
   for (let i = 0; i < letters.length; i++){
+    print("------------------------ ARRAY TEXT SIZE: " + letters[i].size);
     textSize(letters[i].size);
     // textFont(letters[i].font); 
     text(letters[i].character, letters[i].x, letters[i].y);
   }
-  print(letters);
 
-  if (text_size < 50){
-    text_size = 50;
+  //minimum font size
+  if (font_size < 50){
+    font_size = 50;
   }
 
 
@@ -148,7 +143,7 @@ function alphabetDetection(){
     // create an array holding finger movements per letter that can be printed to show what is happening for each hand movement
     // animated letters, j + z < figure out how to do this, maybe holding I or Y for an extended period of time turns them into J and Z?
 
-    textSize(controlSpecs()); //text size and color change with second hand -> hands[1]
+    textSize(font_size); //text size and color change with second hand -> hands[1]
 
     //CHANGING FROM HARD CODING
 
@@ -608,7 +603,7 @@ function controlSpecs(hand){
       let keypoint = hand.keypoints[i];
       circle(keypoint.x, keypoint.y, 10);
       fill(0, 0, 255, 100);
-      textSize(10);
+      // textSize(10);
       // text(i, keypoint.x, keypoint.y);
     }
     let index_finger =  hand.index_finger_tip;
@@ -619,17 +614,17 @@ function controlSpecs(hand){
    
     //pinch distance > text size
     let pinch = dist(index_finger.x, index_finger.y, thumb.x, thumb.y);
-    let text_size = (pinch + 10) * 5;
+    font_size = (pinch + 10) * 5;
 
     fill(0, 0, 255);
     stroke(0);
     line(index_finger.x, index_finger.y, thumb.x, thumb.y);
-    textSize(text_size); //text size and color change with second hand -> hands[1]
+    // textSize(text_size); //text size and color change with second hand -> hands[1]
 
     //rotation > font choice
     //create an array where index 0 == text_sizing and index 1 == font
 
-    return text_size;
+    return font_size;
   }
 }
 
@@ -649,10 +644,9 @@ function handPress(letter){
       console.log("HAND PUSH FORWARD > SAVE LETTER");
       let hand_center_x = (hand.index_finger_mcp.x + hand.pinky_finger_mcp.x) / 2;
       let hand_center_y = (hand.middle_finger_mcp.y + hand.wrist.y) / 2;
-      let current_size = text_size;
-      print(text_size);
+      let current_size = font_size;
+      print("------------------------ TEXT SIZE: " + font_size);
       letter_saved = true;
-
       savedLetter(letter, letter_saved, hand_center_x, hand_center_y, current_size);
       return true;
 
