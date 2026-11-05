@@ -8,12 +8,17 @@ let initial_z;
 
 let current_pose = alphabetDetection;
 
+//fonts
+let font_1;
+let font_2;
+let font_3;
+let font_4;
+
 //TO DO > figure out how to flip the hands, width - x ? or something 
 
 async function setup() {
   createCanvas(windowWidth,windowHeight);
   console.log("ml5 version:", ml5.version);
-  // vid = createCapture(VIDEO);
   vid = createCapture(VIDEO, { flipped: true });  //makes it so that it is mirror
   vid.size(width, height);
 
@@ -22,13 +27,18 @@ async function setup() {
   handPose = await ml5.handPose();
   handPose.detectStart(vid, gotHands);
 
-  connections = handPose.getConnections();
+  connections = handPose.getConnections();  //lines between hand keypoints
+
+  //font loader > add more as it keeps growing
+  font_1 = await loadFont('./fonts/blackletter.ttf');
+  font_2 = await loadFont('./fonts/mono.ttf');
+
 
 }
 
 
 function draw() {
-  background(255);
+  background(220);
   // image(vid, 0, 0);
   // drawHands();
   // controlSpecs();
@@ -566,8 +576,9 @@ function controlSpecs(hand){
     let text_sizing = (pinch + 10) * 5;
 
     fill(0, 0, 255);
+    stroke(0);
     line(index_finger.x, index_finger.y, thumb.x, thumb.y);
-    textSize(text_sizing); //text size and color change with second hand -> hands[1]
+    textSize(text_sizing) //text size and color change with second hand -> hands[1]
 
     return text_sizing;
   }
