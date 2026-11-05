@@ -5,6 +5,7 @@ let connections;
 
 let current_pose = alphabetDetection;
 
+let letter_saved = false;
 let letters = [];
 let text_size;
 
@@ -35,7 +36,7 @@ async function setup() {
 
   //font loader > add more as it keeps growing
   font_1 = await loadFont('./fonts/blackletter.ttf');
-  font_2 = await loadFont('./fonts/mono.ttf');  //replace
+  font_2 = await loadFont('./fonts/mono.ttf');  //replace < incorrect file
 }
 
 
@@ -46,7 +47,6 @@ function draw() {
   // controlSpecs();
   // printLog();
 
-  textSize(200);
   handPress(current_pose());
   // let letter = current_pose();
   // let hand_press = handPress();
@@ -56,11 +56,17 @@ function draw() {
   // let current_text = savedLetter();
   // text(toString(current_text[0]), current_text[1], current_text[2]);
 
-  print("!!!!!!!!!!!!!");
+  // console.log("----------LETTER ARRAY: " + letters);
+  for (let i = 0; i < letters.length; i++){
+    textSize(letters[i].size);
+    // textFont(letters[i].font); 
+    text(letters[i].character, letters[i].x, letters[i].y);
+  }
   print(letters);
-  textSize(200);
-  print(String(letters[0]));
-  text(String(letters[0]), letters[1], letters[2]);
+
+  if (text_size < 50){
+    text_size = 50;
+  }
 
 
 }
@@ -127,7 +133,7 @@ function alphabetDetection(){
       circle(keypoint.x, keypoint.y, 10);
       fill(0, 0, 255, 100);
       textSize(10);
-      text(i, keypoint.x, keypoint.y);
+      // text(i, keypoint.x, keypoint.y);
     }
 
     let hand_center_x = (hand.index_finger_mcp.x + hand.pinky_finger_mcp.x) / 2;
@@ -142,7 +148,7 @@ function alphabetDetection(){
     // create an array holding finger movements per letter that can be printed to show what is happening for each hand movement
     // animated letters, j + z < figure out how to do this, maybe holding I or Y for an extended period of time turns them into J and Z?
 
-    // textSize(controlSpecs()); //text size and color change with second hand -> hands[1]
+    textSize(controlSpecs()); //text size and color change with second hand -> hands[1]
 
     //CHANGING FROM HARD CODING
 
@@ -603,7 +609,7 @@ function controlSpecs(hand){
       circle(keypoint.x, keypoint.y, 10);
       fill(0, 0, 255, 100);
       textSize(10);
-      text(i, keypoint.x, keypoint.y);
+      // text(i, keypoint.x, keypoint.y);
     }
     let index_finger =  hand.index_finger_tip;
     let thumb = hand.thumb_tip;
@@ -613,17 +619,17 @@ function controlSpecs(hand){
    
     //pinch distance > text size
     let pinch = dist(index_finger.x, index_finger.y, thumb.x, thumb.y);
-    let text_sizing = (pinch + 10) * 5;
+    let text_size = (pinch + 10) * 5;
 
     fill(0, 0, 255);
     stroke(0);
     line(index_finger.x, index_finger.y, thumb.x, thumb.y);
-    textSize(text_sizing) //text size and color change with second hand -> hands[1]
+    textSize(text_size); //text size and color change with second hand -> hands[1]
 
     //rotation > font choice
     //create an array where index 0 == text_sizing and index 1 == font
 
-    return text_sizing;
+    return text_size;
   }
 }
 
@@ -639,16 +645,21 @@ function handPress(letter){
     let scale_dist = dist(wrist.x, wrist.y, middle.x, middle.y);
     let threshold = 200;
 
-    if (scale_dist > threshold){
+    if (scale_dist > threshold && letter_saved == false){
       console.log("HAND PUSH FORWARD > SAVE LETTER");
       let hand_center_x = (hand.index_finger_mcp.x + hand.pinky_finger_mcp.x) / 2;
       let hand_center_y = (hand.middle_finger_mcp.y + hand.wrist.y) / 2;
-      let current_size = 
+      let current_size = text_size;
+      print(text_size);
+      letter_saved = true;
 
-      savedLetter(letter, true, hand_center_x, hand_center_y, );
+      savedLetter(letter, letter_saved, hand_center_x, hand_center_y, current_size);
       return true;
-    }
 
+    }
+    else if (scale_dist < threshold){
+      letter_saved = false;
+    }
     else {
       return false;
     }
@@ -657,14 +668,14 @@ function handPress(letter){
 
 //may not need to put text_size or font here
 //may remove all font functionality until I have time > function savedLetter(char, hand_pressed, x, y, text_size, font)
-function savedLetter(char, hand_pressed, x, y, text_size, font){
+function savedLetter(char, hand_pressed, x, y, text_size){
   console.log("SAVE LETTER CALLED");
 
   if(hand_pressed == true){
     console.log("hand press");
     // console.log("CHARACTER: " + char);
-    let add_letter = { character: char, x: }
-    letters = [char, x, y];
+    let add_letter = { character: char, x: x, y: y, size: text_size };
+    letters.push(add_letter);
     return true;
   }
   else {
