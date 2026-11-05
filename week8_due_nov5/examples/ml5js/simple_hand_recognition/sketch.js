@@ -3,10 +3,10 @@ let handPose;
 let hands = [];
 let connections;
 
-let initial_z;
-
-
 let current_pose = alphabetDetection;
+
+let letters = [];
+let text_size;
 
 //fonts
 let font_1;
@@ -14,7 +14,11 @@ let font_2;
 let font_3;
 let font_4;
 
-//TO DO > figure out how to flip the hands, width - x ? or something 
+//--------------- TO DO ---------------
+// figure out how to flip the hands, width - x ? or something 
+// smooth all movement holy it is so jittery, take averages of movement over periods of time
+// do a check in the beginning *tutorial* style that says place dominant hand first, secondary hand next, and then distance from camera == good to start out << will help with threshold hand push check
+// info on side on how to use / what to do < in index but putting a note here
 
 async function setup() {
   createCanvas(windowWidth,windowHeight);
@@ -31,9 +35,7 @@ async function setup() {
 
   //font loader > add more as it keeps growing
   font_1 = await loadFont('./fonts/blackletter.ttf');
-  font_2 = await loadFont('./fonts/mono.ttf');
-
-
+  font_2 = await loadFont('./fonts/mono.ttf');  //replace
 }
 
 
@@ -44,10 +46,21 @@ function draw() {
   // controlSpecs();
   // printLog();
 
-  current_pose();
+  textSize(200);
+  handPress(current_pose());
+  // let letter = current_pose();
+  // let hand_press = handPress();
+  // savedLetter(letter, hand_press
 
-  let current_text = savedLetter;
+  //savedLetter outputs 
+  // let current_text = savedLetter();
+  // text(toString(current_text[0]), current_text[1], current_text[2]);
 
+  print("!!!!!!!!!!!!!");
+  print(letters);
+  textSize(200);
+  print(String(letters[0]));
+  text(String(letters[0]), letters[1], letters[2]);
 
 
 }
@@ -64,7 +77,7 @@ function gotHands(results, err) {
 }
 
 function printLog(){
-  print(hands);
+  console.log(hands);
 }
 
 
@@ -124,12 +137,16 @@ function alphabetDetection(){
     circle(hand_center_x, hand_center_y, 100);
 
     //--------------- TO DO ---------------
-    //create facing forward bool based on average ranges for a hand facing forward
-    //create a prediction model that takes the most commonly chosen signal over the period of 1 second, ex: 4/5 index_finger_half, 1/5 index_finger_down > index_finger_half == true
+    // create facing forward bool based on average ranges for a hand facing forward
+    // create a prediction model that takes the most commonly chosen signal over the period of 1 second, ex: 4/5 index_finger_half, 1/5 index_finger_down > index_finger_half == true
+    // create an array holding finger movements per letter that can be printed to show what is happening for each hand movement
+    // animated letters, j + z < figure out how to do this, maybe holding I or Y for an extended period of time turns them into J and Z?
 
-    textSize(controlSpecs()); //text size and color change with second hand -> hands[1]
+    // textSize(controlSpecs()); //text size and color change with second hand -> hands[1]
 
     //CHANGING FROM HARD CODING
+
+    let current_letter;
 
     let hand_forward = true;
     let hand_down = false;
@@ -157,6 +174,12 @@ function alphabetDetection(){
       hand_forward = false;
     }
 
+    //--------------- TO DO ---------------
+    // ask kevin about every() method
+    // let target = hand.keypoints[0].y
+    // let hand_down = hand.keypoints.every(item => target < item.y);
+    // console.log("--------------------------hand_down: " + hand_down);
+
     //case hand upside down
     //does not make sure it is smaller than *all* the items, only one at a time, affecting G and H recognition
     //needs to be the complete smallest y not just smaller than some y
@@ -167,25 +190,19 @@ function alphabetDetection(){
       }
     }
 
-    //TO DO > ask kevin about every() method
-    // let target = hand.keypoints[0].y
-    // let hand_down = hand.keypoints.every(item => target < item.y);
-    // console.log("--------------------------hand_down: " + hand_down);
-
-
     //case index finger up
     if ((hand.index_finger_tip.y < hand.index_finger_dip.y) &&
         (hand.index_finger_dip.y < hand.index_finger_pip.y) &&
         (hand.index_finger_pip.y < hand.index_finger_mcp.y)){
 
       index_finger_up = true;
-      console.log("INDEX UP");
+      // console.log("INDEX UP");
     }
     //case index finer half down
     else if ((dist(hand.index_finger_tip.x, hand.index_finger_tip.y, hand.index_finger_mcp.x, hand.index_finger_mcp.y) < 35)){
 
       index_finger_half = true;
-      console.log("INDEX HALF");
+      // console.log("INDEX HALF");
     }
     //case index finger down
     else{
@@ -193,7 +210,7 @@ function alphabetDetection(){
       // (hand.index_finger_pip.y < hand.index_finger_dip.y) &&
       // (hand.index_finger_dip.y < hand.index_finger_tip.y))
       index_finger_down = true;
-      console.log("INDEX DOWN");
+      // console.log("INDEX DOWN");
     }
     
     //case middle finger up
@@ -202,18 +219,18 @@ function alphabetDetection(){
         (hand.middle_finger_pip.y < hand.middle_finger_mcp.y)){
 
       middle_finger_up = true;
-      console.log("MIDDLE UP");
+      // console.log("MIDDLE UP");
     }
     //case middle finger half down
     else if ((dist(hand.middle_finger_tip.x, hand.middle_finger_tip.y, hand.middle_finger_mcp.x, hand.middle_finger_mcp.y) < 40)){
 
       middle_finger_half = true;
-      console.log("MIDDLE HALF");
+      // console.log("MIDDLE HALF");
     }
     //case middle finger down
     else{
       middle_finger_down = true;
-      console.log("MIDDLE DOWN");
+      // console.log("MIDDLE DOWN");
     }
 
     //case ring finger up
@@ -222,17 +239,17 @@ function alphabetDetection(){
         (hand.ring_finger_pip.y < hand.ring_finger_mcp.y)){
 
       ring_finger_up = true;
-      console.log("RING UP");
+      // console.log("RING UP");
     }
     else if ((dist(hand.ring_finger_tip.x, hand.ring_finger_tip.y, hand.ring_finger_mcp.x, hand.ring_finger_mcp.y) < 45)){
 
       ring_finger_half = true;
-      console.log("RING HALF");
+      // console.log("RING HALF");
     }
     //case middle finger down
     else{
       ring_finger_down = true;
-      console.log("RING DOWN");
+      // console.log("RING DOWN");
     }
 
     //case pinky finger up
@@ -241,17 +258,17 @@ function alphabetDetection(){
         (hand.pinky_finger_pip.y < hand.pinky_finger_mcp.y)){
       
       pinky_finger_up = true;
-      console.log("PINKY UP");
+      // console.log("PINKY UP");
     }
     else if ((dist(hand.middle_finger_tip.x, hand.middle_finger_tip.y, hand.middle_finger_mcp.x, hand.middle_finger_mcp.y) < 60)){
 
       pinky_finger_half = true;
-      console.log("PINKY HALF");
+      // console.log("PINKY HALF");
     }
     //case middle finger down
     else{
       pinky_finger_down = true;
-      console.log("PINKY DOWN");
+      // console.log("PINKY DOWN");
     }
 
     //case thumb out
@@ -261,7 +278,7 @@ function alphabetDetection(){
         (hand.thumb_tip.x > hand.index_finger_pip.x)){
 
       thumb_out = true;
-      console.log("THUMB OUT");
+      // console.log("THUMB OUT");
     }
 
     //case thumb curled
@@ -269,7 +286,7 @@ function alphabetDetection(){
              (hand.thumb_tip.x < hand.thumb_ip.x)){
 
       thumb_curled = true;
-      console.log("THUMB CURLED");
+      // console.log("THUMB CURLED");
     }
 
     //case thumb between index and middle
@@ -277,7 +294,7 @@ function alphabetDetection(){
              (abs(hand.thumb_tip.y - hand.index_finger_pip.y) < 15)){
 
       thumb_hook_middle = true;
-      console.log("THUMB HOOKED MIDDLE");
+      // console.log("THUMB HOOKED MIDDLE");
     }
 
     //case thumb hooked between middle and ring
@@ -285,7 +302,7 @@ function alphabetDetection(){
              (abs(hand.thumb_tip.y - hand.middle_finger_pip.y) < 20)){
 
       thumb_hook_ring = true;
-      console.log("THUMB HOOKED RING");
+      // console.log("THUMB HOOKED RING");
     }
 
     //case thumb hooked between ring and pinky
@@ -293,11 +310,9 @@ function alphabetDetection(){
              (abs(hand.thumb_tip.y - hand.ring_finger_pip.y) < 25)){
 
       thumb_hook_pinky = true;
-      console.log("THUMB HOOKED PINKY");
+      // console.log("THUMB HOOKED PINKY");
     }
 
-
-    
 
     //-------ALPHABET DETECTION-------
 
@@ -309,6 +324,7 @@ function alphabetDetection(){
 
         console.log("--- 'A' DETECTED");
         text('A', hand_center_x, hand_center_y);
+        current_letter = 'A';
       }
 
       //case B
@@ -316,6 +332,7 @@ function alphabetDetection(){
 
         console.log("--- 'B' DETECTED");
         text('B', hand_center_x, hand_center_y);
+        current_letter = 'B';
       }
 
       //case D
@@ -323,6 +340,7 @@ function alphabetDetection(){
 
         console.log("--- 'D' DETECTED");
         text('D', hand_center_x, hand_center_y);
+        current_letter = 'D';
       }
 
       //case E < FIX HER < JUST NEED TO MOVE THUMB SLIGHTLY UPWARDS
@@ -330,7 +348,7 @@ function alphabetDetection(){
 
         console.log("--- 'E' DETECTED");
         text('E', hand_center_x, hand_center_y);
-
+        current_letter = 'E';
       }
 
       //case F
@@ -338,6 +356,7 @@ function alphabetDetection(){
 
         console.log("--- 'F' DETECTED");
         text('F', hand_center_x, hand_center_y);
+        current_letter = 'F';
       }
 
       //case I
@@ -345,6 +364,7 @@ function alphabetDetection(){
 
         console.log("--- 'I' DETECTED");
         text('I', hand_center_x, hand_center_y);
+        current_letter = 'I';
       }
 
       //case J > special > super unsure how to do this tbh bc its animated movement
@@ -356,6 +376,7 @@ function alphabetDetection(){
 
         console.log("--- 'K' DETECTED");
         text('K', hand_center_x, hand_center_y);
+        current_letter = 'K';
       }
 
       //case L
@@ -363,6 +384,7 @@ function alphabetDetection(){
 
         console.log("--- 'L' DETECTED");
         text('L', hand_center_x, hand_center_y);
+        current_letter = 'L';
       }
 
       //case M
@@ -370,6 +392,7 @@ function alphabetDetection(){
       
         console.log("--- 'M' DETECTED");
         text('M', hand_center_x, hand_center_y);
+        current_letter = 'M';
       }
 
       //case N
@@ -377,6 +400,7 @@ function alphabetDetection(){
           
         console.log("--- 'N' DETECTED");
         text('N', hand_center_x, hand_center_y);
+        current_letter = 'N';
       }
 
       //case R
@@ -385,6 +409,7 @@ function alphabetDetection(){
           
         console.log("--- 'R' DETECTED");
         text('R', hand_center_x, hand_center_y);
+        current_letter = 'R';
       }
 
       //case S << FIX HER << OK WORKS BETTER WHEN FURTHER FROM CAMERA
@@ -394,13 +419,15 @@ function alphabetDetection(){
         
         console.log("--- 'S' DETECTED");
         text('S', hand_center_x, hand_center_y);
+        current_letter = 'S';
       }
 
       //case T
       else if (index_finger_up == false && middle_finger_up == false && ring_finger_up == false && pinky_finger_up == false && thumb_hook_middle == true){
         
         console.log("--- 'T' DETECTED");
-        text('T', hand_center_x, hand_center_y);      
+        text('T', hand_center_x, hand_center_y);
+        current_letter = 'T';    
       }
 
       //case U
@@ -409,6 +436,7 @@ function alphabetDetection(){
         
         console.log("--- 'U' DETECTED");
         text('U', hand_center_x, hand_center_y);  
+        current_letter = 'U';
       }
 
       //case V
@@ -417,6 +445,7 @@ function alphabetDetection(){
         
         console.log("--- 'V' DETECTED");
         text('V', hand_center_x, hand_center_y);  
+        current_letter = 'V';
       }
       
       //case W
@@ -424,6 +453,7 @@ function alphabetDetection(){
               
         console.log("--- 'W' DETECTED");
         text('W', hand_center_x, hand_center_y);  
+        current_letter = 'W';
       }
 
       //case X
@@ -431,7 +461,8 @@ function alphabetDetection(){
               (dist(hand.index_finger_tip.x, hand.index_finger_tip.y, hand.index_finger_dip.x, hand.index_finger_dip.y) < 30)){
               
         console.log("--- 'X' DETECTED");
-        text('X', hand_center_x, hand_center_y);              
+        text('X', hand_center_x, hand_center_y); 
+        current_letter = 'X';             
       }
 
       //case Y
@@ -439,18 +470,20 @@ function alphabetDetection(){
           
         console.log("--- 'Y' DETECTED");
         text('Y', hand_center_x, hand_center_y);  
+        current_letter = 'Y';
       }
 
       //case Z << not sure how to do with the animations
 
       else {
-        print("NO LETTER DETECTED");
+        console.log("NO LETTER DETECTED");
+        current_letter = null;
       }
     }
 
     else if (hand_forward == false && hand_down == false) {
       //hand not facing forward
-      console.log("HAND NOT FACING FORWARDS");
+      // console.log("HAND NOT FACING FORWARDS");
 
       //case C > special case
       if ((dist(hand.index_finger_tip.x, hand.index_finger_tip.y, hand.middle_finger_tip.x, hand.middle_finger_tip.y) < 20) &&
@@ -464,6 +497,7 @@ function alphabetDetection(){
 
         console.log("--- 'C' DETECTED");
         text('C', hand_center_x, hand_center_y);
+        current_letter = 'C';
       }
 
       //case G
@@ -477,6 +511,7 @@ function alphabetDetection(){
                 
         console.log("--- 'G' DETECTED");
         text('G', hand_center_x, hand_center_y);
+        current_letter = 'G';
       }
 
       //case H
@@ -491,6 +526,7 @@ function alphabetDetection(){
 
         console.log("--- 'H DETECTED");
         text('H', hand_center_x, hand_center_y);
+        current_letter = 'H';
       }
 
       //case O > similar to c but distance use pinch function to determine whether or not it is touching
@@ -505,16 +541,18 @@ function alphabetDetection(){
         
         console.log("--- 'O' DETECTED");
         text('O', hand_center_x, hand_center_y);
+        current_letter = 'O';
       }
 
       else {
-        print("NO LETTER DETECTED");
+        console.log("NO LETTER DETECTED");
+        current_letter = null;
       }
     }
 
     else if (hand_down == true){
       //hand pointing downward
-      console.log("HAND FACING DOWNWARD");
+      // console.log("HAND FACING DOWNWARD");
   
       //case P
       if (ring_finger_up == false && pinky_finger_up == false &&
@@ -527,6 +565,7 @@ function alphabetDetection(){
 
         console.log("--- 'P' DETECTED");
         text('P', hand_center_x, hand_center_y);
+        current_letter = 'P';
       }
       
       //case Q
@@ -539,12 +578,17 @@ function alphabetDetection(){
   
         console.log("--- 'Q' DETECTED");
         text('Q', hand_center_x, hand_center_y);
+        current_letter = 'Q';
       }
 
       else {
-        print("NO LETTER DETECTED");
+        console.log("NO LETTER DETECTED");
+        current_letter = null;
       }
     }
+
+    //returns what letter is displayed, or null if no letter detected
+    return current_letter;
 
   }
 }
@@ -566,12 +610,8 @@ function controlSpecs(hand){
 
     let point_x = (index_finger.x + thumb.x) / 2;
     let point_y = (index_finger.y + thumb.y) / 2;
-
-    //pinch distance
-    let initial_z = hand.keypoints3D[9].z;
-    console.log("-----------------------INITIAL Z: " + initial_z);
-
-
+   
+    //pinch distance > text size
     let pinch = dist(index_finger.x, index_finger.y, thumb.x, thumb.y);
     let text_sizing = (pinch + 10) * 5;
 
@@ -580,14 +620,56 @@ function controlSpecs(hand){
     line(index_finger.x, index_finger.y, thumb.x, thumb.y);
     textSize(text_sizing) //text size and color change with second hand -> hands[1]
 
+    //rotation > font choice
+    //create an array where index 0 == text_sizing and index 1 == font
+
     return text_sizing;
   }
 }
 
-function savedLetter(){
-  let letter_array = [];
+function handPress(letter){
+  //press in > lock-in letter
 
+  if (hands.length > 0 && letter){
+    let hand = hands[0];
+    
+    let wrist = hand.wrist;
+    let middle = hand.middle_finger_mcp;
 
-  return letter_array;
+    let scale_dist = dist(wrist.x, wrist.y, middle.x, middle.y);
+    let threshold = 200;
+
+    if (scale_dist > threshold){
+      console.log("HAND PUSH FORWARD > SAVE LETTER");
+      let hand_center_x = (hand.index_finger_mcp.x + hand.pinky_finger_mcp.x) / 2;
+      let hand_center_y = (hand.middle_finger_mcp.y + hand.wrist.y) / 2;
+      let current_size = 
+
+      savedLetter(letter, true, hand_center_x, hand_center_y, );
+      return true;
+    }
+
+    else {
+      return false;
+    }
+  }
+}
+
+//may not need to put text_size or font here
+//may remove all font functionality until I have time > function savedLetter(char, hand_pressed, x, y, text_size, font)
+function savedLetter(char, hand_pressed, x, y, text_size, font){
+  console.log("SAVE LETTER CALLED");
+
+  if(hand_pressed == true){
+    console.log("hand press");
+    // console.log("CHARACTER: " + char);
+    let add_letter = { character: char, x: }
+    letters = [char, x, y];
+    return true;
+  }
+  else {
+    console.log("no hand press");
+    return null;
+  }
 
 }
