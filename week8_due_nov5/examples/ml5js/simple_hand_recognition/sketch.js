@@ -3,8 +3,12 @@ let handPose;
 let hands = [];
 let connections;
 
+let initial_z;
+
 
 let current_pose = alphabetDetection;
+
+//TO DO > figure out how to flip the hands, width - x ? or something 
 
 async function setup() {
   createCanvas(windowWidth,windowHeight);
@@ -24,13 +28,17 @@ async function setup() {
 
 
 function draw() {
-  background(220);
+  background(255);
   // image(vid, 0, 0);
   // drawHands();
-  
+  // controlSpecs();
+  // printLog();
+
   current_pose();
 
-  // printLog();
+  let current_text = savedLetter;
+
+
 
 }
 
@@ -86,23 +94,6 @@ function printFingerDataKey(){
   });
 }
 
-function pinch(){
-  if (hands.length > 0){
-    let index_finger =  hands[0].index_finger_tip;
-    let thumb = hands[0].thumb_tip;
-
-    let point_x = (index_finger.x + thumb.x) / 2;
-    let point_y = (index_finger.y + thumb.y) / 2;
-
-    //pinch distance
-    let pinch = dist(index_finger.x, index_finger.y, thumb.x, thumb.y);
-
-    fill(0, 0, 255);
-    line(index_finger.x, index_finger.y, thumb.x, thumb.y);
-  }
-}
-
-
 function alphabetDetection(){
   if (hands.length > 0){
     let hand = hands[0];
@@ -126,7 +117,8 @@ function alphabetDetection(){
     //create facing forward bool based on average ranges for a hand facing forward
     //create a prediction model that takes the most commonly chosen signal over the period of 1 second, ex: 4/5 index_finger_half, 1/5 index_finger_down > index_finger_half == true
 
-    textSize(200); //text size and color change with second hand -> hands[1]
+    textSize(controlSpecs()); //text size and color change with second hand -> hands[1]
+
     //CHANGING FROM HARD CODING
 
     let hand_forward = true;
@@ -156,16 +148,20 @@ function alphabetDetection(){
     }
 
     //case hand upside down
+    //does not make sure it is smaller than *all* the items, only one at a time, affecting G and H recognition
+    //needs to be the complete smallest y not just smaller than some y
     for (let i = 0; i < hand.keypoints.length; i++){
       let keypoint = hand.keypoints[i];
-      if (hand.keypoints[0].y > keypoint.y){
-        hand_down = false;
-      }
-      else{
+      if (hand.keypoints[0].y < keypoint.y){
         hand_down = true;
       }
-
     }
+
+    //TO DO > ask kevin about every() method
+    // let target = hand.keypoints[0].y
+    // let hand_down = hand.keypoints.every(item => target < item.y);
+    // console.log("--------------------------hand_down: " + hand_down);
+
 
     //case index finger up
     if ((hand.index_finger_tip.y < hand.index_finger_dip.y) &&
@@ -541,4 +537,46 @@ function alphabetDetection(){
     }
 
   }
+}
+
+function controlSpecs(hand){
+  if (hands.length > 1){
+    let hand = hands[1];
+    for (let i = 0; i < hand.keypoints.length; i++){
+      fill(255, 0 , 255, 100);
+      noStroke();
+      let keypoint = hand.keypoints[i];
+      circle(keypoint.x, keypoint.y, 10);
+      fill(0, 0, 255, 100);
+      textSize(10);
+      text(i, keypoint.x, keypoint.y);
+    }
+    let index_finger =  hand.index_finger_tip;
+    let thumb = hand.thumb_tip;
+
+    let point_x = (index_finger.x + thumb.x) / 2;
+    let point_y = (index_finger.y + thumb.y) / 2;
+
+    //pinch distance
+    let initial_z = hand.keypoints3D[9].z;
+    console.log("-----------------------INITIAL Z: " + initial_z);
+
+
+    let pinch = dist(index_finger.x, index_finger.y, thumb.x, thumb.y);
+    let text_sizing = (pinch + 10) * 5;
+
+    fill(0, 0, 255);
+    line(index_finger.x, index_finger.y, thumb.x, thumb.y);
+    textSize(text_sizing); //text size and color change with second hand -> hands[1]
+
+    return text_sizing;
+  }
+}
+
+function savedLetter(){
+  let letter_array = [];
+
+
+  return letter_array;
+
 }
