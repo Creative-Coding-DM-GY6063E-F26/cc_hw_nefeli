@@ -18,6 +18,8 @@ let useNoise = false;
 let noiseAmount = 100; // max distance (in pixels) noise can push a circle
 let noiseTime = 0;
 
+let filtering = false;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(220);
@@ -37,6 +39,11 @@ function draw() {
       y += map(noise(noiseTime + 1000), 0, 1, -noiseAmount, noiseAmount);
       noiseTime += 0.05;
     }
+
+    if (filtering){
+      filter(INVERT);
+    }
+    filtering = false;
 
     circle(x, y, width * sizes[sizeIndex]);
   }
@@ -58,7 +65,21 @@ function keyPressed() {
   if (key === 'l') {
     useNoise = !useNoise;
   }
+
+  if (key === 'f'){
+    frameRate(10);
+  }
+
+  if (key === 'd') {
+    frameRate(60);
+  }
+
+  if (key === 'g') {
+    filtering = true; 
+  }
 }
+
+
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }

@@ -37,12 +37,28 @@ function drawSquare(x, y, size) {
   square(x, y, size);
 }
 
+function drawTriangle(x, y, size){
+  // triangle(x, y-(size/2), x-(size/2), y+(size/2), x+(size/2), y+(size/2));
+
+  beginShape();
+  for (let i = 0; i < 3; i++){
+    let angle = TWO_PI / 3 * i - HALF_PI;
+    let x1 = x + cos(angle) * size/2;
+    let y1 = y + sin(angle) * size/2;
+    vertex(x1, y1);
+  }
+  endShape(CLOSE);
+}
+
 function keyPressed() {
   if (key === '1') {
     currentShape = drawCircle; // swap which function is stored
   }
   if (key === '2') {
     currentShape = drawSquare;
+  }
+  if (key === '3') {
+    currentShape = drawTriangle;
   }
 }
 

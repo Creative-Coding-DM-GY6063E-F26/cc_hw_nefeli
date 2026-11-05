@@ -10,10 +10,15 @@ function setup() {
 
 function draw() {
   noStroke(); 
-  fill('peachpuff');
+  // fill('peachpuff');
 
   if (mouseIsPressed) {
-    circle(mouseX, mouseY, width*0.0625);
+    let color_r = map(mouseY, 0, height, 10, 255);
+    let color_g = map(mouseY, 1, 1/height, 10, 255);
+    let color_b = map(mouseY, 1, height*2, 10, 255);
+    fill(color_r,color_g,color_b);
+    let circle_d = map(mouseX, 0, width, 5, 250);
+    circle(mouseX, mouseY, circle_d);
   }
 }
 
@@ -29,4 +34,6 @@ function windowResized() {
 // Exercises for you to try :
 // 1. Use mouseX or mouseY to change the circle's size or color as you draw.
 //    Hint: map(mouseX, 0, width, 5, 100)
+
+
 
