@@ -10,6 +10,7 @@ let letters = [];
 let font_size;
 
 //fonts
+let font_0;
 let font_1;
 let font_2;
 let font_3;
@@ -29,14 +30,17 @@ async function setup() {
 
   // vid.hide();
   // background(220);
-  handPose = await ml5.handPose();
+  handPose = await ml5.handPose({ flipHorizontal: true });
   handPose.detectStart(vid, gotHands);
 
-  connections = handPose.getConnections();  //lines between hand keypoints
+  connections = handPose.getConnections();  //lines between hand keypoints  
 
   //font loader > add more as it keeps growing
+  font_0 = await loadFont('./fonts/serif.ttf');
   font_1 = await loadFont('./fonts/blackletter.ttf');
-  font_2 = await loadFont('./fonts/mono.ttf');  //replace < incorrect file
+  font_2 = await loadFont('./fonts/mono.ttf');
+  font_3 = await loadFont('./fonts/graffiti.otf');
+  font_4 = await loadFont('./fonts/michroma.ttf');
 }
 
 
@@ -275,8 +279,8 @@ function alphabetDetection(){
     //case thumb out
     if ((hand.thumb_tip.y < hand.thumb_ip.y) &&
         (hand.thumb_ip.y < hand.thumb_mcp.y) &&
-        (hand.thumb_tip.x > hand.thumb_mcp.x) &&
-        (hand.thumb_tip.x > hand.index_finger_pip.x)){
+        (hand.thumb_tip.x < hand.thumb_mcp.x) &&
+        (hand.thumb_tip.x < hand.index_finger_pip.x)){
 
       thumb_out = true;
       // console.log("THUMB OUT");
@@ -284,14 +288,14 @@ function alphabetDetection(){
 
     //case thumb curled
     else if ((dist(hand.middle_finger_mcp.x, hand.middle_finger_mcp.y, hand.thumb_tip.x, hand.thumb_tip.y) < 50) &&
-             (hand.thumb_tip.x < hand.thumb_ip.x)){
+             (hand.thumb_tip.x > hand.thumb_ip.x)){
 
       thumb_curled = true;
       // console.log("THUMB CURLED");
     }
 
     //case thumb between index and middle
-    else if ((hand.middle_finger_pip.x < hand.thumb_tip.x < hand.index_finger_pip.x) &&
+    else if ((hand.middle_finger_pip.x < hand.thumb_tip.x && hand.thumb_tip.x < hand.index_finger_pip.x) &&
              (abs(hand.thumb_tip.y - hand.index_finger_pip.y) < 15)){
 
       thumb_hook_middle = true;
@@ -299,7 +303,7 @@ function alphabetDetection(){
     }
 
     //case thumb hooked between middle and ring
-    else if ((hand.ring_finger_pip.x < hand.thumb_tip.x && hand.thumb_tip.x < hand.middle_finger_pip.x) &&
+    else if ((hand.ring_finger_pip.x > hand.thumb_tip.x && hand.thumb_tip.x > hand.middle_finger_pip.x) &&
              (abs(hand.thumb_tip.y - hand.middle_finger_pip.y) < 20)){
 
       thumb_hook_ring = true;
@@ -307,7 +311,7 @@ function alphabetDetection(){
     }
 
     //case thumb hooked between ring and pinky
-    else if ((hand.pinky_finger_pip.x < hand.thumb_tip.x && hand.thumb_tip.x < hand.ring_finger_pip.x) &&
+    else if ((hand.pinky_finger_pip.x > hand.thumb_tip.x && hand.thumb_tip.x > hand.ring_finger_pip.x) &&
              (abs(hand.thumb_tip.y - hand.ring_finger_pip.y) < 25)){
 
       thumb_hook_pinky = true;
@@ -372,7 +376,7 @@ function alphabetDetection(){
       
       //case K
       else if (index_finger_up == true && middle_finger_up == true && ring_finger_down == true && pinky_finger_down == true && thumb_curled == false &&
-              (hand.middle_finger_pip.x < hand.thumb_tip.x && hand.thumb_tip.x < hand.index_finger_pip.x) && 
+              (hand.middle_finger_pip.x > hand.thumb_tip.x && hand.thumb_tip.x > hand.index_finger_pip.x) && 
               (dist(hand.index_finger_tip.x, hand.index_finger_tip.y, hand.middle_finger_tip.x, hand.middle_finger_tip.y) > 50)){
 
         console.log("--- 'K' DETECTED");
@@ -406,7 +410,7 @@ function alphabetDetection(){
 
       //case R
       else if (pinky_finger_up == false && ring_finger_up == false && middle_finger_up == true && index_finger_up == true &&
-              (hand.middle_finger_tip.x > hand.index_finger_tip.x) && thumb_out == false){
+              (hand.middle_finger_tip.x < hand.index_finger_tip.x) && thumb_out == false){
           
         console.log("--- 'R' DETECTED");
         text('R', hand_center_x, hand_center_y);
@@ -491,10 +495,10 @@ function alphabetDetection(){
          (dist(hand.middle_finger_tip.x, hand.middle_finger_tip.y, hand.ring_finger_tip.x, hand.ring_finger_tip.y) < 20) &&
          (abs(hand.thumb_tip.x - hand.middle_finger_tip.x) < 20) &&
          (abs(hand.thumb_tip.y - hand.middle_finger_tip.y) > 60) &&
-         (hand.index_finger_tip.x > hand.index_finger_pip.x) &&
-         (hand.middle_finger_tip.x > hand.middle_finger_pip.x) &&
-         (hand.ring_finger_tip.x > hand.ring_finger_pip.x) &&
-         (hand.pinky_finger_tip.x > hand.pinky_finger_pip.x)){
+         (hand.index_finger_tip.x < hand.index_finger_pip.x) &&
+         (hand.middle_finger_tip.x < hand.middle_finger_pip.x) &&
+         (hand.ring_finger_tip.x < hand.ring_finger_pip.x) &&
+         (hand.pinky_finger_tip.x < hand.pinky_finger_pip.x)){
 
         console.log("--- 'C' DETECTED");
         text('C', hand_center_x, hand_center_y);
@@ -502,8 +506,8 @@ function alphabetDetection(){
       }
 
       //case G
-      else if ((hand.index_finger_tip.x > hand.index_finger_dip.x) &&
-              (hand.index_finger_dip.x > hand.index_finger_pip.x) &&
+      else if ((hand.index_finger_tip.x < hand.index_finger_dip.x) &&
+              (hand.index_finger_dip.x < hand.index_finger_pip.x) &&
               (abs(hand.index_finger_tip.x - hand.middle_finger_mcp.x) > 40) &&
               (abs(hand.middle_finger_tip.x - hand.ring_finger_mcp.x) < 40) &&
               middle_finger_up == false &&
@@ -516,10 +520,10 @@ function alphabetDetection(){
       }
 
       //case H
-      else if ((hand.index_finger_tip.x > hand.index_finger_dip.x) &&
-              (hand.index_finger_dip.x > hand.index_finger_pip.x) &&
-              (hand.middle_finger_tip.x > hand.middle_finger_dip.x) &&
-              (hand.middle_finger_dip.x > hand.middle_finger_pip.x) &&
+      else if ((hand.index_finger_tip.x < hand.index_finger_dip.x) &&
+              (hand.index_finger_dip.x < hand.index_finger_pip.x) &&
+              (hand.middle_finger_tip.x < hand.middle_finger_dip.x) &&
+              (hand.middle_finger_dip.x < hand.middle_finger_pip.x) &&
               (abs(hand.index_finger_tip.x - hand.middle_finger_mcp.x) > 40) &&
               (abs(hand.middle_finger_tip.x - hand.ring_finger_mcp.x) > 40) &&
               ring_finger_up == false &&
@@ -535,10 +539,10 @@ function alphabetDetection(){
          (dist(hand.middle_finger_tip.x, hand.middle_finger_tip.y, hand.ring_finger_tip.x, hand.ring_finger_tip.y) < 40) &&
          (abs(hand.thumb_tip.x - hand.pinky_finger_tip.x) < 20) &&
          (abs(hand.thumb_tip.y - hand.pinky_finger_tip.y) < 20) &&
-         (hand.index_finger_tip.x > hand.index_finger_pip.x) &&
-         (hand.middle_finger_tip.x > hand.middle_finger_pip.x) &&
-         (hand.ring_finger_tip.x > hand.ring_finger_pip.x) &&
-         (hand.pinky_finger_tip.x > hand.pinky_finger_pip.x)){
+         (hand.index_finger_tip.x < hand.index_finger_pip.x) &&
+         (hand.middle_finger_tip.x < hand.middle_finger_pip.x) &&
+         (hand.ring_finger_tip.x < hand.ring_finger_pip.x) &&
+         (hand.pinky_finger_tip.x < hand.pinky_finger_pip.x)){
         
         console.log("--- 'O' DETECTED");
         text('O', hand_center_x, hand_center_y);
@@ -561,8 +565,8 @@ function alphabetDetection(){
               (hand.index_finger_pip.y > hand.index_finger_mcp.y) &&
               (hand.middle_finger_tip.y > hand.middle_finger_pip.y) &&
               (hand.middle_finger_pip.y > hand.middle_finger_mcp.y) &&
-              (hand.middle_finger_pip.x < hand.thumb_tip.x) &&
-              (hand.thumb_tip.x < hand.index_finger_pip.x)){
+              (hand.middle_finger_pip.x > hand.thumb_tip.x) &&
+              (hand.thumb_tip.x > hand.index_finger_pip.x)){
 
         console.log("--- 'P' DETECTED");
         text('P', hand_center_x, hand_center_y);
@@ -637,8 +641,9 @@ function handPress(letter){
     let wrist = hand.wrist;
     let middle = hand.middle_finger_mcp;
 
+    //maybe instead of scale distance, do 3D Z, maybe it wont be as weird
     let scale_dist = dist(wrist.x, wrist.y, middle.x, middle.y);
-    let threshold = 200;
+    let threshold = 250;
 
     if (scale_dist > threshold && letter_saved == false){
       console.log("HAND PUSH FORWARD > SAVE LETTER");
