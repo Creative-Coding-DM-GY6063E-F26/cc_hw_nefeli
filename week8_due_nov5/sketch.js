@@ -11,6 +11,7 @@ let font_size = 0;
 
 //fonts
 let current_font;
+let fonts = [];
 let font_0;
 let font_1;
 let font_2;
@@ -36,11 +37,13 @@ async function setup() {
   connections = handPose.getConnections();  //lines between hand keypoints  
 
   //font loader > add more as it keeps growing
-  font_0 = await loadFont('./fonts/serif.ttf');
-  font_1 = await loadFont('./fonts/blackletter.ttf');
-  font_2 = await loadFont('./fonts/mono.ttf');
-  font_3 = await loadFont('./fonts/graffiti.otf');
-  font_4 = await loadFont('./fonts/michroma.ttf');
+  // font_0 = await loadFont('./fonts/serif.ttf');
+  // font_1 = await loadFont('./fonts/blackletter.ttf');
+  // font_2 = await loadFont('./fonts/mono.ttf');
+  // font_3 = await loadFont('./fonts/graffiti.otf');
+  // font_4 = await loadFont('./fonts/michroma.ttf');
+
+  // fonts = [font_0, font_1, font_2, font_3, font_4];
 
   angleMode(DEGREES);
 }
@@ -619,7 +622,7 @@ function controlSpecs(hand){
     //pinch distance > text size
     let pinch = dist(index_finger.x, index_finger.y, thumb.x, thumb.y);
     font_size = lerp(font_size, (pinch + 10) * 5, 0.25);
-    console.log("------------------ FONT SIZE: " + font_size);
+    // console.log("------------------ FONT SIZE: " + font_size);
     // font_size = (pinch + 10) * 5;
 
     fill(0, 0, 255);
@@ -628,7 +631,9 @@ function controlSpecs(hand){
 
     //rotation > font choice
     //create an array where index 0 == text_sizing and index 1 == font
-
+    let rotation = atan2(hand.wrist.y - hand.thumb_mcp.y, hand.wrist.x - hand.thumb_mcp.x);
+    let font_index = map(rotation, 80, -130, 0, 4);
+    // current_font = fonts[font_index];
     
   }
 }
@@ -652,13 +657,14 @@ function handPress(letter){
       let hand_center_x = (hand.index_finger_mcp.x + hand.pinky_finger_mcp.x) / 2;
       let hand_center_y = (hand.middle_finger_mcp.y + hand.wrist.y) / 2;
       let current_size = font_size;
+      let font = current_font;
 
       letter_saved = true;
 
       savedLetter(letter, letter_saved, hand_center_x, hand_center_y, current_size);
       return true;
-
     }
+
     else if (scale_dist < threshold){
       letter_saved = false;
     }
