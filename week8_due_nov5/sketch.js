@@ -29,7 +29,7 @@ async function setup() {
   vid = createCapture(VIDEO, { flipped: true });  //makes it so that it is mirror
   vid.size(width, height);
 
-  // vid.hide();
+  vid.hide();
   // background(220);
   handPose = await ml5.handPose({ flipHorizontal: true });
   handPose.detectStart(vid, gotHands);
@@ -621,7 +621,7 @@ function controlSpecs(hand){
    
     //pinch distance > text size
     let pinch = dist(index_finger.x, index_finger.y, thumb.x, thumb.y);
-    font_size = lerp(font_size, (pinch + 10) * 5, 0.25);
+    font_size = lerp(font_size, (pinch + 10) * 5, 0.22);
     // console.log("------------------ FONT SIZE: " + font_size);
     // font_size = (pinch + 10) * 5;
 
