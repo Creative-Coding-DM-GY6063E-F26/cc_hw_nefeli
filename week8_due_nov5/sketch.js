@@ -7,9 +7,10 @@ let current_pose = alphabetDetection;
 
 let letter_saved = false;
 let letters = [];
-let font_size;
+let font_size = 0;
 
 //fonts
+let current_font;
 let font_0;
 let font_1;
 let font_2;
@@ -17,7 +18,6 @@ let font_3;
 let font_4;
 
 //--------------- TO DO ---------------
-// figure out how to flip the hands, width - x ? or something 
 // smooth all movement holy it is so jittery, take averages of movement over periods of time
 // do a check in the beginning *tutorial* style that says place dominant hand first, secondary hand next, and then distance from camera == good to start out << will help with threshold hand push check
 // info on side on how to use / what to do < in index but putting a note here
@@ -41,6 +41,8 @@ async function setup() {
   font_2 = await loadFont('./fonts/mono.ttf');
   font_3 = await loadFont('./fonts/graffiti.otf');
   font_4 = await loadFont('./fonts/michroma.ttf');
+
+  angleMode(DEGREES);
 }
 
 
@@ -52,7 +54,6 @@ function draw() {
 
   controlSpecs();
   handPress(current_pose());
-
 
   // console.log("----------LETTER ARRAY: " + letters);
   for (let i = 0; i < letters.length; i++){
@@ -66,7 +67,6 @@ function draw() {
   if (font_size < 50){
     font_size = 50;
   }
-
 
 }
 
@@ -618,17 +618,18 @@ function controlSpecs(hand){
    
     //pinch distance > text size
     let pinch = dist(index_finger.x, index_finger.y, thumb.x, thumb.y);
-    font_size = (pinch + 10) * 5;
+    font_size = lerp(font_size, (pinch + 10) * 5, 0.25);
+    console.log("------------------ FONT SIZE: " + font_size);
+    // font_size = (pinch + 10) * 5;
 
     fill(0, 0, 255);
     stroke(0);
     line(index_finger.x, index_finger.y, thumb.x, thumb.y);
-    // textSize(text_size); //text size and color change with second hand -> hands[1]
 
     //rotation > font choice
     //create an array where index 0 == text_sizing and index 1 == font
 
-    return font_size;
+    
   }
 }
 
@@ -643,15 +644,17 @@ function handPress(letter){
 
     //maybe instead of scale distance, do 3D Z, maybe it wont be as weird
     let scale_dist = dist(wrist.x, wrist.y, middle.x, middle.y);
-    let threshold = 250;
+    let threshold = 200;
 
     if (scale_dist > threshold && letter_saved == false){
       console.log("HAND PUSH FORWARD > SAVE LETTER");
+
       let hand_center_x = (hand.index_finger_mcp.x + hand.pinky_finger_mcp.x) / 2;
       let hand_center_y = (hand.middle_finger_mcp.y + hand.wrist.y) / 2;
       let current_size = font_size;
-      print("------------------------ TEXT SIZE: " + font_size);
+
       letter_saved = true;
+
       savedLetter(letter, letter_saved, hand_center_x, hand_center_y, current_size);
       return true;
 
