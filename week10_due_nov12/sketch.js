@@ -48,7 +48,7 @@ async function setup() {
 }
 
 function draw() {
-  background(220);
+  background(255);
   //stuff w visuals once audio is done
   //load everything in first
 }
@@ -59,7 +59,7 @@ function keyPressed(){
     console.log("space/backing_vocals pressed");
   }
   if (keyCode === ENTER || keyCode === 13){
-    backingHandler(backing_beat, 0.4);
+    backingHandler(backing_beat, 0.2);
     console.log("enter/beat pressed");
   }
   if (keyCode === BACKSPACE || keyCode === 8){
