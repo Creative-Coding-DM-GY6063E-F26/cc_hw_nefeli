@@ -22,6 +22,7 @@ let font_4;
 // smooth all movement holy it is so jittery, take averages of movement over periods of time
 // do a check in the beginning *tutorial* style that says place dominant hand first, secondary hand next, and then distance from camera == good to start out << will help with threshold hand push check
 // info on side on how to use / what to do < in index but putting a note here
+// abstract all the checks on finger position to be a function that can get passed in each finger, and return up, down, or half
 
 async function setup() {
   createCanvas(windowWidth,windowHeight);
